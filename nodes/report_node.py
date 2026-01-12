@@ -38,8 +38,7 @@ def report_node(state: AgentState):
     # 2. Save to file
     filename = f"{topic.replace(' ', '_')}_report.{report_format}"
     # Ensure reports dir exists
-    if not os.path.exists("reports"):
-        os.makedirs("reports")
+    os.makedirs("reports", exist_ok=True)
     
     filepath = os.path.join("reports", filename)
     

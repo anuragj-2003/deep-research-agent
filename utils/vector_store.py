@@ -36,6 +36,8 @@ def add_to_vector_store(text_data: list[str], metadatas: list[dict] = None):
     else:
          vectorstore = FAISS.from_texts(text_data, embeddings, metadatas=metadatas)
     
+    # Ensure directory exists
+    os.makedirs(VECTOR_STORE_PATH, exist_ok=True)
     vectorstore.save_local(VECTOR_STORE_PATH)
 
 def query_vector_store(query: str, k: int = 5) -> str:

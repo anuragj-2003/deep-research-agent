@@ -66,17 +66,13 @@ def send_email_node(state: AgentState):
     
     msg['Subject'] = subject
     
-    # Improved HTML body
-    summary_text = state.summary if state.summary else "No summary available."
+    # Simple HTML body without summary
     html_body = f"""
     <html>
       <body>
         <h2>Research Report: {topic}</h2>
-        <p>Here is your research report.</p>
-        <h3>Summary</h3>
-        <p>{summary_text.replace(chr(10), '<br>')}</p>
-        <br>
-        <p>Please find the full report attached.</p>
+        <p>Please find your requested research report attached.</p>
+        <p>Best regards,<br>Autonomous Research Agent</p>
       </body>
     </html>
     """

@@ -1,18 +1,18 @@
-import os
-from dotenv import load_dotenv
+import uuid
+from langchain_core.messages import HumanMessage
 from graphs.agent_graph import create_graph
-from states.state import AgentState
+from states.state import AgentState, InputState
 
 def main():
     print("Welcome to the Autonomous Research Agent")
-    topic = input("Enter a research topic: ")
+    user_input = input("Enter your research request (e.g. 'Research AI and send pdf to me@example.com'): ")
     
     # Create the graph
     app = create_graph()
     
     # Initial state
     initial_state = {
-        "topic": topic
+        "messages": [HumanMessage(content=user_input)]
     }
     
     thread_id = str(uuid.uuid4())

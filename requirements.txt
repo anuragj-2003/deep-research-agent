@@ -7,6 +7,4 @@ langchain-community
 faiss-cpu
 langchain-huggingface
 sentence-transformers
-python-pptx
-fpdf
 python-dotenv

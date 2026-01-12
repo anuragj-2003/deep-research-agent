@@ -7,3 +7,4 @@ reports/
 data/
 .pytest_cache/
 .langgraph_api/
+js_reports/node_modules/

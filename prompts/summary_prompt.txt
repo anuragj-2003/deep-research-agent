@@ -1,0 +1,9 @@
+You are an expert summarizer. You have collected the following research data on the topic "{topic}":
+
+{research_data}
+
+Please synthesize this information into a comprehensive summary.
+- Focus on the most important facts and insights.
+- Cite sources where possible.
+- Organize the summary logically (e.g., by sub-topic).
+- Be objective and factual.

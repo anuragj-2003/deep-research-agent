@@ -1,0 +1,15 @@
+You are a professional report writer.
+Topic: {topic}
+
+Based on the following summary, please generate a detailed report in Markdown format.
+The report should be structured suitable for conversion to {report_format}.
+
+Summary:
+{summary}
+
+Requirements:
+- Title and Table of Contents (if applicable to the format).
+- Introduction, Body Paragraphs, Conclusion.
+- Professional tone.
+- If the format is 'ppt', organize content into slides with title and bullet points.
+- If the format is 'pdf' or 'doc', use standard headers and paragraphs.

@@ -1,0 +1,12 @@
+langgraph
+langchain
+langchain-groq
+tavily-python
+beautifulsoup4
+langchain-community
+faiss-cpu
+langchain-huggingface
+sentence-transformers
+python-pptx
+fpdf
+python-dotenv

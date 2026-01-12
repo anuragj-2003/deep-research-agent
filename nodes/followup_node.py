@@ -10,15 +10,14 @@ def ask_followup(state: AgentState):
     response = interrupt("Would you like to ask a follow-up query? (Enter query or 'no' to finish):")
     
     if response and isinstance(response, str) and response.lower() not in ["no", "n", "none"]:
-        # Reset relevant state parts for a fresh run on new topic
-        # We keep messages history but might want to add a marker
+        # We append the response as a HumanMessage so parse_node can read it
+        from langchain_core.messages import HumanMessage
         return {
-            "topic": response,
-            "research_data": [], # Clear old data
+            "messages": [HumanMessage(content=response)],
+            "research_data": [], # Clear data to trigger loop back
+            # We DON'T set 'topic' here; let parse_input extract it from the message
             "summary": None,
-            "report_content": None,
-            "report_format": None,
-            "email": None
+            "report_content": None
         }
     
     return {} # No state update, will transition to END

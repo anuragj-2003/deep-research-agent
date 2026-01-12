@@ -49,13 +49,14 @@ def create_graph():
     def check_followup(state):
         # Loop logic: If research_data is reset (empty), it means we loop back.
         if state.research_data == []:
-             return "research"
+             # Go to parser to handle new input (topic, format, etc)
+             return "parse_input"
         return END
 
     workflow.add_conditional_edges(
         "ask_followup",
         check_followup,
-        {"research": "research", END: END}
+        {"parse_input": "parse_input", END: END}
     )
     
     # Set up checkpointer

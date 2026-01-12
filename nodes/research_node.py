@@ -24,7 +24,8 @@ def research_node(state: AgentState):
     filled_prompt = prompt_template.format(topic=topic, research_data=json.dumps(research_data, indent=2))
     
     # Initialize LLM
-    llm = ChatGroq(model="llama-3.1-8b-instant", api_key=os.getenv("GROQ_API_KEY"))
+    from utils.config import LLM_MODEL, GROQ_API_KEY
+    llm = ChatGroq(model=LLM_MODEL, api_key=GROQ_API_KEY)
     llm_with_tools = llm.bind_tools([tavily_search, scrape_website])
     
     messages = [SystemMessage(content=filled_prompt)] + state.messages

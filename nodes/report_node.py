@@ -30,7 +30,8 @@ def report_node(state: AgentState):
     # The prompt expects {summary}. Let's inject context there.
     filled_prompt = prompt.format(topic=topic, summary=context, report_format=report_format)
     
-    llm = ChatGroq(model="llama-3.1-8b-instant", api_key=os.getenv("GROQ_API_KEY"))
+    from utils.config import LLM_MODEL, GROQ_API_KEY
+    llm = ChatGroq(model=LLM_MODEL, api_key=GROQ_API_KEY)
     response = llm.invoke([HumanMessage(content=filled_prompt)])
     content = response.content
     

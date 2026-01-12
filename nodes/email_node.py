@@ -35,10 +35,11 @@ def send_email_node(state: AgentState):
         return {"messages": [HumanMessage(content=f"Error: Report file {filepath} not found.")]}
 
     # Configuration
-    port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = os.getenv("SMTP_USER")
-    password = os.getenv("SMTP_PASSWORD")
+    # Configuration
+    from utils.config import SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASSWORD
+    
+    sender_email = SMTP_USER
+    password = SMTP_PASSWORD
     
     if not sender_email or not password:
          return {"messages": [HumanMessage(content="Error: SMTP credentials not set in environment variables.")]}
@@ -93,7 +94,7 @@ def send_email_node(state: AgentState):
     text = msg.as_string()
 
     try:
-        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
             server.login(sender_email, password)
             server.sendmail(sender_email, user_email, text)
         

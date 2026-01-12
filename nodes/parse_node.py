@@ -47,7 +47,8 @@ def parse_input_node(state: AgentState):
     Output: { "topic": "Quantum Computing", "report_format": "pdf", "email": "bob@example.com" }
     """
     
-    llm = ChatGroq(model="llama-3.1-8b-instant", api_key=os.getenv("GROQ_API_KEY"), temperature=0)
+    from utils.config import LLM_MODEL, GROQ_API_KEY
+    llm = ChatGroq(model=LLM_MODEL, api_key=GROQ_API_KEY, temperature=0)
     structured_llm = llm.with_structured_output(ParsedInput)
     
     try:

@@ -4,8 +4,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
-VECTOR_STORE_PATH = "data/vector_store"
-EMBEDDINGS_MODEL = "all-MiniLM-L6-v2"
+from utils.config import EMBEDDINGS_MODEL, VECTOR_STORE_PATH
 
 def get_embeddings():
     return HuggingFaceEmbeddings(model_name=EMBEDDINGS_MODEL)

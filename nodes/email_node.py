@@ -46,8 +46,7 @@ def send_email_node(state: AgentState):
 
     # Create a secure SSL context
     context = ssl.create_default_context()
-
-    subject = f"Research Report: {topic}"
+    
     subject = f"Research Report: {topic}"
     # Body is now handled in MIMEMultipart construction
     
@@ -63,8 +62,6 @@ def send_email_node(state: AgentState):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = user_email
-    msg['Subject'] = subject
-    
     msg['Subject'] = subject
     
     # Simple HTML body without summary

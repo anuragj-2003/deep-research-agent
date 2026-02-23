@@ -2,7 +2,7 @@
 
 An autonomous AI research assistant built with LangGraph that performs recursive web research, synthesizes professional reports, and delivers them via email as .docx attachments.
 
-![Architecture Diagram](assets/architecture.png)
+![Architecture Diagram](assets/architecture.svg)
 
 ## How It Works: Architecture Deep Dive
 

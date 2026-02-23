@@ -1,58 +1,42 @@
 # Deep Research Agent 🚀
 
-An autonomous AI agent built with **LangGraph** that performs deep web research, synthesizes professional reports, and delivers them via email as `.docx` attachments.
+An autonomous AI research assistant built with **LangGraph** that performs recursive web research, synthesizes professional reports, and delivers them via email as `.docx` attachments.
+
+![Architecture Diagram](assets/architecture.png)
+
+## 🧠 How It Works: Architecture Deep Dive
+
+The Deep Research Agent is choreographed using a stateful directed acyclic graph (DAG) via **LangGraph**. Unlike standard chatbots, it follows a rigorous multi-stage pipeline:
+
+### 1. Planning & Subquery Generation
+The agent starts by analyzing the user's question through a **Planner** node. It creates a high-level research plan and breaks it down into multiple, targeted sub-queries. This "fragmentation" ensures that different facets of the topic are researched in parallel.
+
+### 2. Parallel Search & Join
+The agent utilizes a **Fan-Out** pattern to dispatch multiple **Search Workers** simultaneously. Each worker queries the **Tavily AI** API. Once all searches complete, a **Joiner** node aggregates the raw search results, deduplicates hits, and prepares them for deep reading.
+
+### 3. Deep Reading & Summarization
+For the top results, the agent fans out again into **Content Reader** nodes. These nodes use **Trafilatura** to scrape clean text from web pages and then summarize each source relative to the original question. This ensures only the most relevant "gold" nuggets of information make it into the final report.
+
+### 4. Synthesis & Reflection
+The **Synthesizer** compiles all summaries, search results, and citations into a comprehensive Markdown report. Before finishing, a **Reflector** node evaluates the draft. If it identifies gaps or area for improvement, it circles back to the Planning stage for another round of research.
+
+### 5. Human-In-The-Loop (HITL) & Delivery
+Once the report is ready, the agent hits an `interrupt()` point. It pauses execution and prompts the user in LangGraph Studio to provide the **Receiver's Email Address**. 
+Upon resuming:
+- The **Word Generator** converts the Markdown into a structured `.docx` file.
+- The **SMTP Engine** sends a beautifully formatted HTML email with the document attached.
 
 ## Features
-- **Deep Web Search**: Leverages Tavily for comprehensive information retrieval.
-- **Iterative Planning**: Uses a planner node to break down complex queries into sub-tasks.
-- **Premium Report Generation**: Dynamically generates a high-quality Markdown report based on research.
-- **DOCX Export**: Automatically converts research results into a structured Microsoft Word document.
-- **Email Delivery**: Sends the report as an attachment via Gmail SMTP.
-- **Human-In-The-Loop**: Pauses execution to ask the user for the receiver's email address using `interrupt()`.
-- **Flexible LLM Support**: Designed to work with Groq (Llama 3) or Gemini.
+- **Recursive Reasoning**: Iteratively improves its research through reflection.
+- **DOCX Export**: Automated conversion from Markdown to Microsoft Word.
+- **HITL Verification**: Interactive input for dynamic delivery.
+- **Async Execution**: Faster processing through parallel search and read workers.
 
 ## Prerequisites
 - Python 3.9+
 - [LangGraph CLI](https://github.com/langchain-ai/langgraph)
-- API Keys:
-  - [Groq API Key](https://wow.groq.com/)
-  - [Tavily API Key](https://tavily.com/)
+- API Keys: [Groq](https://wow.groq.com/), [Tavily](https://tavily.com/)
 - [Gmail App Password](https://support.google.com/accounts/answer/185833) (for SMTP)
 
-## Setup
-
-1. **Clone and Install**:
-```bash
-git clone <your-repo-url>
-cd deep_research_agent
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-2. **Environment Variables**:
-Create a `.env` file in the root:
-```env
-GROQ_API_KEY="your_groq_key"
-TAVILY_API_KEY="your_tavily_key"
-GROQ_MODEL="llama-3.3-70b-versatile"
-
-# SMTP
-SMTP_SERVER="smtp.gmail.com"
-SMTP_PORT=587
-SMTP_USER="your-email@gmail.com"
-SMTP_PASS="your-app-password"
-```
-
-3. **Run Locally**:
-```bash
-langgraph dev
-```
-
-## Deployment
-
-This agent is optimized for **LangGraph Cloud (LangSmith)**.
-1. Push this repository to GitHub.
-2. In LangSmith, create a **New Deployment**.
-3. Mirror your `.env` variables into the LangSmith deployment settings.
-4. Access your agent via the cloud-hosted Studio or API!
+## Setup & Deployment
+Refer to the [Implementation Walkthrough](walkthrough.md) for detailed setup and LangGraph Cloud deployment steps.

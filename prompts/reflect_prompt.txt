@@ -1,0 +1,20 @@
+Reflect on the current draft answer **specifically with respect to the user's question**.
+
+User Question:
+{question}
+
+Current Draft Answer:
+{answer_draft}
+
+Identify:
+1) Missing perspectives or contradictions worth checking.
+2) At most 3 targeted follow-up sub-queries.
+3) Verdict: "continue" or "stop" with a one-sentence justification.
+
+Return strict JSON:
+{{
+  "gaps": ["..."],
+  "followups": ["..."],
+  "decision": "continue|stop",
+  "why": "..."
+}}

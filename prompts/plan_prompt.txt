@@ -1,0 +1,8 @@
+User question:
+{question}
+
+Draft a brief plan (2–5 bullet points) for how you will research and answer this. Focus on sub-questions and source types.
+Return strict JSON:
+{{
+  "plan": "A short paragraph or bullet points as a single string."
+}}

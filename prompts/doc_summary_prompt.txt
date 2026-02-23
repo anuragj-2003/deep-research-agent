@@ -1,0 +1,12 @@
+Summarize the following web page into 5–8 crisp bullet points geared toward answering:
+{question}
+
+Title: {title}
+URL: {url}
+Content (truncated):
+{content}
+
+Return strict JSON:
+{{
+  "summary": "A single string containing bullet points, not a list."
+}}

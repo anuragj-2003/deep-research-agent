@@ -1,0 +1,10 @@
+Question:
+{question}
+
+Plan:
+{plan}
+
+Propose 3–5 concrete search sub-queries (no duplicates). Return strict JSON:
+{{
+  "subqueries": ["...", "..."]
+}}
